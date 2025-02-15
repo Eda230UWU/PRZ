@@ -18,9 +18,6 @@ AMyTrain::AMyTrain()
 	}
 	//TODO
 	//Ucharactermovementcontroler - zrychleni atd silly veci xd
-
-
-
 }
 
 // Called when the game starts or when spawned
@@ -52,8 +49,8 @@ void AMyTrain::Tick(float DeltaTime)
 	moveRotation = FRotator(0.0f, Controller->GetControlRotation().Yaw, 0.0f);
 	directionVectorF = moveRotation.RotateVector(FVector::ForwardVector);
 	directionVectorR = moveRotation.RotateVector(FVector::RightVector);
-	// GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, ForwardVelocity.ToString());
-
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, ForwardVelocity.ToString());
+	
 	AddMovementInput(directionVectorF, ForwardVelocity.X);
 
 }
@@ -71,25 +68,17 @@ void AMyTrain::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 }
 
 void AMyTrain::moveVehicle(const FInputActionValue& Value) {
-
-
-
 	moveVector = Value.Get<FVector2D>();
-
-
+	moveVector.X = 0.f;
 
 	changeVelocityFront((FVector)moveVector.Y);
 	AddMovementInput(directionVectorR, moveVector.X);
-
-
-
 }
 
 void AMyTrain::changeVelocityFront(FVector Velocity) {
 
 	Velocity = FVector(Velocity.X);
 	ForwardVelocity += Velocity;
-
 
 }
 
